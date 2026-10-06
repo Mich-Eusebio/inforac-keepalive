@@ -1,0 +1,22 @@
+name: Keep INFORAC Awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping INFORAC
+        run: |
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --max-time 60 \
+            --retry 2 \
+            https://inforac.net/
